@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block page_title %}
+    Reports
+{% endblock %}
+{% block page_body %}
+    <h3>Raporty</h3>
+
+    <table class="uk-table uk-table-divider">
+        <thead>
+        <tr>
+            <th>Nazwa raportu</th>
+            <th>Pobierz</th>
+        </tr>
+        </thead>
+        {% for key,name in reports.items %}
+
+            <tr>
+                <td>{{ name }}</td>
+                <td>
+                    <a href={% url 'generate_raport' id=key %}
+                               class="uk-button uk-button-default uk-border-rounded" style="color: black">
+                    <span class="uk-icon" style="color: black" uk-icon="download"></span>
+
+                    </a>
+                </td>
+                </td>
+            </tr>
+
+        {% endfor %}
+    </table>
+
+{% endblock %}

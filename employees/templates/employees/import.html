@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load employees_extras %}
+{% block page_title %}
+    Import
+{% endblock %}
+{% block page_body %}
+    <h3>Importuj</h3>
+    <h4>Import stawek z pliku.csv</h4>
+    Import pozwala zaktualizować stawki Pracownika, jeśli data aktualizacji jest równa lub późniejsza niż data
+    ostatniego zapisu historycznego. Jeśli pracownik posiada już zapis z datą obowiązywania stawka zostanie
+    uaktualniona. Jeśli nie posiada zapisu zostanie dodany nowy zapis z datą obowiązywania zgodną z datą w pliku
+    (pozostałe dane zostaną skopiowane z ostatniego zapisu).
+    <p class="uk-text-danger">Ważne: Plik csv musi posiadać nagłówki: emp_no, date_from, new_salary</p>
+    <form method="post" enctype="multipart/form-data" class="uk-button-large">
+        {% csrf_token %}
+        <input type="file" name="upload_file" class="uk-button uk-button-default uk-border-rounded">
+        <button type="submit" class="uk-button uk-button-default uk-border-rounded">Import</button>
+    </form>
+
+    {% if message %}
+        <p style=" color: green">{{ message }}</p>
+    {% endif %}
+    {% if logs %}
+        <h4>Szczegóły importu:</h4>
+        {% for log in logs %}
+            {% if log|get_item:'status' == '1' %}
+            <p style="font-size: small;color: green; line-height: 1px">  {{ log|get_item:'message' }}</p>
+            {% else %}
+            <p style="font-size: small;color: red; line-height: 1px">  {{ log|get_item:'message' }}</p>
+            {% endif %}
+
+        {% endfor %}
+
+
+    {% endif %}
+            {#                {% for k, v in log.items %}#}
+            {#                        {% if k == "message" %}#}
+            {#                            <p style="font-size: small; line-height: 1px">{{ v }} </p>#}
+
+
+    {% if message_failed %}
+        <p class="uk-text-danger">{{ message_failed }}</p>
+    {% endif %}
+{% endblock %}

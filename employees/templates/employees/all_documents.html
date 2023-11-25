@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block page_title %}
+    Documents
+{% endblock %}
+
+
+{% block page_body %}
+    <h2>Dokumenty</h2>
+    {% if request.path == '/employees/documents' %}
+        <form class="uk-width-1-1">
+            <input style="background-color: inherit!important;"
+                   id="name" name="name"
+                   class="uk-input uk-border-rounded uk-width-2-5 uk-margin-small-right"
+                   placeholder="Wyszukaj po nazwisku">
+            <button type="submit" style="background-color: ghostwhite; color: black"
+                    class="uk-button uk-button-default uk-border-rounded">Szukaj
+            </button>
+        </form>
+
+        {% if filter_name %}
+            <div style="color: lightseagreen">
+                Wyniki wyszukiwania dla: {{ filter_name }}
+            </div>
+        {% endif %}
+    {% else %}
+
+        <div>
+
+            <a class="uk-button uk-button-default uk-button-small uk-border-rounded" style="color: grey"
+               href="{{ request.META.HTTP_REFERER }}">
+                <span class="uk-icon-link" style="color: black" uk-icon="reply"></span>
+                <div style="font-size: small">Powrót</div>
+            </a>
+        </div>
+    {% endif %}
+    <p></p>
+    {% if documents %}
+        <table class="uk-table uk-table-striped">
+        <thead>
+        <tr>
+            <th>Numer pracownika</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Rodzaj dokumentu</th>
+            <th>Rok</th>
+            <th>Szczegóły</th>
+        </tr>
+        </thead>
+        {% for document in documents %}
+
+            <tr>
+                <td>{{ document.emp__emp_no }}</td>
+                <td>{{ document.emp__first_name }}</td>
+                <td>{{ document.emp__surname }}</td>
+                <td>{{ document.document_type }}</td>
+                <td>{{ document.document_year }}</td>
+
+                <td>
+                    <a class="uk-button uk-button-default uk-border-rounded" style="color: black"
+                       href={% url 'document_details' id=document.id %}>
+                        <span class="uk-icon" style="color: black" uk-icon="search"></span>
+
+                    </a>
+
+                </td>
+            </tr>
+
+        {% endfor %}
+    {% else %}
+        Brak dokumentów.
+    {% endif %}
+</table>
+{% endblock %}
+

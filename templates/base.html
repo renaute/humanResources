@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block page_title %}
+
+    {% endblock %}</title>
+
+
+    <link rel="stylesheet" href="{% static 'css/hr_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/uikit.min.css' %}">
+    <script src="{% static 'js/uikit.min.js' %}"></script>
+    <script src="{% static 'js/uikit-icons.min.js' %}"></script>
+
+</head>
+<body>
+
+<div class="hr-nav uk-flex-column" style="gap: 15px">
+    {% include 'nav_button.html' with url_name='all_employees' icon='users' name='Pracownicy' %}
+    {% include 'nav_button.html' with url_name='all_documents' icon='copy' name='Dokumenty' %}
+    {% include 'nav_button.html' with url_name='reports' icon='push' name='Exportuj dane' %}
+    {% include 'nav_button.html' with url_name='import_data' icon='pull' name='Importuj dane' %}
+
+</div>
+<div id="wrapper">
+    <div class="hr-header">
+        <img src="{% static '/images/human-resources.png' %}"  alt="HR" width="50" height="50">
+        Human Resources
+    </div>
+    <div class="uk-padding-small">
+        {% block page_body %}
+
+        {% endblock %}
+    </div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+﻿emp_no;first_name;surname;birth_date;sex;street;house_no;apart_no;city;zip_code;post;email
+1001;Jan;Kowalski;1987-06-15;M;Zielona;12;1;Kraków;30-678;Kraków;jan.kowalski@firma.pl
+1002;Anna;Nowak;1986-07-08;K;Kolorowa;1;2;Warszawa;30-679;Warszawa;anna.nowak@firma.pl
+1003;Joanna;Sowa;1990-03-02;K;Grodzka;1C;3;Kraków;30-680;Kraków;joanna.sowa@firma.pl
+1004;Antoni;Mak;1987-08-09;M;Bracka;6B;56;Kraków;56-970;Kraków;antoni.mak@firma.pl
+1005;Rafał;Kozłowski;1987-06-18;M;Morelowa;8;78;Łódź;56-971;Łódź;rafał.kozłowski@firma.pl
+1006;Karolina;Nowakowska;1988-12-12;K;Nowa Droga;3;43;Łódź;56-972;Łódź;karolina.nowakowska@firma.pl
+1007;Janusz;Golibroda;1970-02-02;M;os. Kolorowe;987;6;Kraków;56-973;Kraków;janusz.golibroda@firma.pl
+1008;Sylwia;Król;1985-03-15;K;os. Piastów;345;7F;Kraków;12-450;Kraków;sylwia.król@firma.pl
+1009;Agata;Nowa;1981-11-16;K;Wrocławska;12;9B;Kraków;12-451;Kraków;agata.nowa@firma.pl
+1010;Karol;Kowalczyk;1999-09-09;M;Królewska;45;7;Kraków;12-452;Kraków;karol.kowalczyk@firma.pl

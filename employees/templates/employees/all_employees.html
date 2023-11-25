@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block page_title %}
+    Employees
+{% endblock %}
+
+
+{% block page_body %}
+    <h2>Pracownicy</h2>
+    <form class="uk-width-1-1">
+        <input style="background-color: inherit!important;"
+               id="name" name="name"
+               class="uk-input uk-border-rounded uk-width-2-5 uk-margin-small-right"
+               placeholder="Wyszukaj po nazwisku">
+        <button type="submit" style="background-color: ghostwhite; color: black"
+                class="uk-button uk-button-default uk-border-rounded">Szukaj
+        </button>
+    </form>
+    {% if filter_name %}
+        <div style="color: lightseagreen">
+            Wyniki wyszukiwania dla: {{ filter_name }}
+        </div>
+    {% endif %}
+
+
+    <table class="uk-table uk-table-striped">
+        <thead>
+        <tr>
+            <th>Numer</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Data urodzenia</th>
+            <th>Szczegóły</th>
+        </tr>
+        </thead>
+        {% for employee in employees %}
+
+            <tr>
+                <td>{{ employee.emp_no }}</td>
+                <td>{{ employee.first_name }}</td>
+                <td>{{ employee.surname }}</td>
+                <td>{{ employee.birth_date | date:"d-m-Y" }}</td>
+                <td>
+                    <a class="uk-button uk-button-default uk-border-rounded" style="color: black"
+                       href={% url 'employee_details' id=employee.id %}>
+                        <span class="uk-icon" style="color: black" uk-icon="search"></span>
+
+                    </a>
+
+                </td>
+            </tr>
+
+        {% endfor %}
+    </table>
+{% endblock %}
+

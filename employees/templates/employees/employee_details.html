@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block page_title %}
+    Employee details
+{% endblock %}
+{% block page_body %}
+    <h3>{{ employee }} </h3>
+<div>
+<span>Zobacz dokumenty Pracownika </span>
+    <a class="uk-button uk-button-default uk-border-rounded" style="color: white"
+       href="{% url 'documents_for_employee' id=employee.id %}">
+        <span class="uk-icon-link" style="color: black" uk-icon="copy"></span>
+        <div>{{ name }}</div>
+    </a>
+</div>
+
+    <p></p>
+    <div class="group-table">
+        <h5 class="group-headlines">Dane personalne </h5>
+
+        <div class="table-line">
+
+            <label class="uk-text-default">Imię:</label>
+            <input class="uk-input uk-form-width-medium" type="text"
+                   placeholder={{ employee.first_name }} aria-label="100" readonly="">
+            <label class="uk-text-default">Nazwisko:</label>
+            <input class="uk-input uk-form-width-medium" type="text" placeholder={{ employee.surname }} aria-label="100"
+                   readonly="">
+        </div>
+        <div class="table-line">
+            <label class="uk-text-default" style="white-space: nowrap">Data urodzenia:</label>
+            <input class="uk-input uk-form-width-small" type="text"
+                   placeholder={{ employee.birth_date | date:"d-m-Y" }} aria-label="100" readonly="">
+            <label class="uk-text-default">Płeć:</label>
+            <input class="uk-input uk-form-width-small" type="text" placeholder={{ employee.sex }} aria-label="100"
+                   readonly="">
+        </div>
+    </div>
+    <p></p>
+    <div class="group-table">
+        <h5 class="group-headlines">Dane adresowe </h5>
+        <div class="table-line">
+            <label class="uk-text-default">Ulica:</label>
+            <input class="uk-input uk-form-width-small" type="text"
+                   placeholder={{ employee.street }} aria-label="100" readonly="">
+            <label class="uk-text-default" style="white-space: nowrap">Numer domu:</label>
+            <input class="uk-input uk-form-width-small" type="text" placeholder={{ employee.house_no }} aria-label="100"
+                   readonly="">
+            <label class="uk-text-default" style="white-space: nowrap">Numer lokalu:</label>
+            <input class="uk-input uk-form-width-small" type="text" placeholder={{ employee.apart_no }} aria-label="100"
+                   readonly="">
+        </div>
+        <div class="table-line">
+            <label class="uk-text-default">Miejscowość:</label>
+            <input class="uk-input uk-form-width-small" type="text"
+                   placeholder={{ employee.city }} aria-label="100" readonly="">
+            <label class="uk-text-default" style="white-space: nowrap">Kod pocztowy:</label>
+            <input class="uk-input uk-form-width-small" type="text" placeholder={{ employee.zip_code }} aria-label="100"
+                   readonly="">
+            <label class="uk-text-default">Poczta:</label>
+            <input class="uk-input uk-form-width-small" type="text" placeholder={{ employee.post }} aria-label="100"
+                   readonly="">
+        </div>
+
+    </div>
+    </p>
+
+
+    <div class="group-table">
+        <h5 class="group-headlines">Historia zatrudnienia</h5>
+        <table class="uk-table uk-table-divider">
+            <thead>
+            <tr>
+                <th>Data Od</th>
+                <th>Data Do</th>
+                <th>Rodzaj umowy</th>
+                <th>Stanowisko</th>
+                <th>Stawka</th>
+            </tr>
+            </thead>
+            <tr>
+                {% for emp_hist in empl_history %}
+                    {% if emp_hist.date_from == first_day %}
+                        <td></td>
+                    {% else %}
+                        <td>  {{ emp_hist.date_from | date:"d-m-Y" }}</td>
+                    {% endif %}
+                    {% if emp_hist.date_to == last_day %}
+                        <td></td>
+                    {% else %}
+                        <td>  {{ emp_hist.date_to | date:"d-m-Y" }}</td>
+                    {% endif %}
+                    <td>  {{ emp_hist.employment_type }}</td>
+                    <td>   {{ emp_hist.position }}</td>
+                    <td>   {{ emp_hist.salary }}</td>
+                    </tr>
+
+
+                {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}

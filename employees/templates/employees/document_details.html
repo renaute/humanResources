@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load employees_extras %}
+{% block page_title %}
+    Document details
+{% endblock %}
+{% block page_body %}
+    <h3>
+        {% for el in document %}
+            {{ el.emp__first_name }}
+            {{ el.emp__surname }}
+            {{ el.document_type }}
+            {{ el.document_year }}
+        {% endfor %}
+    </h3>
+    <table class="uk-table uk-width-max-content">
+        {#        {{ empl_data|get_item:'Imie'}}#}
+        <tr>
+            <td>
+                <h4>Dane podatnika:</h4>
+                {% for k,v in empl_data.items %}
+                    {% if v != '' %}
+                        <p style="font-size: small; line-height: 1px"> {{ k }} : {{ v }} </p>
+                    {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                <h4>Dochody podatnika:</h4>
+                {% for k,v in empl_income.items %}
+                    {% if v != 0 %}
+                        <p style="font-size: small; line-height: 1px"> {{ k }} : {{ v | floatformat:2 }} </p>
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+
+        <div>
+
+            <a class="uk-button uk-button-default uk-button-small uk-border-rounded" style="color: grey"
+               href="{% url 'document_generate_pdf' id=doc_id %}">
+                <span class="uk-icon-link" style="color: black" uk-icon="file-pdf"></span>
+                <div style="font-size: small">Zapisz do pdf</div>
+            </a>
+        </div>
+{% endblock %}
